@@ -24,7 +24,7 @@ public class BookDaoImpl implements BookDao{
 	}
 
 	@Override
-	public int update(Book book) {
+	public int updateById(Integer id, Book book) {
 		String sql = "update book set title=?, price=?, stock=?, published=? where id=?";
 		int cowcount = jdbcTemplate.update(sql, book.getTitle(), book.getPrice(), book.getStock(), book.getPublished(), book.getId());
 		return cowcount;

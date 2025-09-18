@@ -8,8 +8,8 @@ import com.example.demo.model.entity.Book;
 public interface BookDao {
 	
 	int save(Book book);
-	int update(Book book);
-	int deleteById(Integer id);
+	int updateById(Integer id, Book book);
+	int deleteById(Integer id) ;
 	
 	Optional<Book> findBookById(Integer id);
 	
