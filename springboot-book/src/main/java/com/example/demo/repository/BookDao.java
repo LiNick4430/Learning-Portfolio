@@ -14,5 +14,5 @@ public interface BookDao {
 	Optional<Book> findBookById(Integer id);
 	
 	List<Book> findAll();
-	List<Book> findByPage(Integer start, Integer size);
+	List<Book> findBooksByPage(Integer start, Integer size);
 }

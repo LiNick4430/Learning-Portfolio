@@ -55,7 +55,7 @@ public class BookDaoImpl implements BookDao{
 	}
 
 	@Override
-	public List<Book> findByPage(Integer start, Integer size) {
+	public List<Book> findBooksByPage(Integer start, Integer size) {
 		String sql = "select id, title, price, stock, published from book limit ? offset ? ";
 		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Book.class), size, start);
 	}

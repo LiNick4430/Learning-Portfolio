@@ -51,8 +51,8 @@ public class BookServiceImpl implements BookService{
 		return bookDao.findAll().stream().map(book -> toBookDTO(book)).toList();
 	}
 	@Override
-	public List<BookDTO> findByPage(Integer start, Integer size) {
-		return bookDao.findByPage(start, size).stream().map(book -> toBookDTO(book)).toList();
+	public List<BookDTO> findBooksByPage(Integer start, Integer size) {
+		return bookDao.findBooksByPage(start, size).stream().map(book -> toBookDTO(book)).toList();
 	}
 	@Override
 	public BookDTO findBookById(Integer id) throws BookNotFoundException{

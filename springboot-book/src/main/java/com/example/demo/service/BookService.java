@@ -16,7 +16,7 @@ public interface BookService {
 	void deleteBookById(Integer id)  throws BookNotFoundException;
 	
 	List<BookDTO> findAllBooks();
-	List<BookDTO> findByPage(Integer start, Integer size);
+	List<BookDTO> findBooksByPage(Integer start, Integer size);
 	
 	BookDTO findBookById(Integer id)  throws BookNotFoundException;
 }

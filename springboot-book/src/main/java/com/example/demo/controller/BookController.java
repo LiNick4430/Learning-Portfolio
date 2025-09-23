@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.List;
-
+import com.example.demo.service.BookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.example.demo.SpringbootBookApplication;
 import com.example.demo.exception.BookNotFoundException;
 import com.example.demo.model.dto.BookDTO;
 import com.example.demo.response.ApiResponse;
@@ -36,6 +38,22 @@ public class BookController {
 	public ApiResponse<List<BookDTO>> getAllBook() {
 		List<BookDTO> bookDTOs = bookService.findAllBooks();
 		return new ApiResponse<>(true, "多筆查詢成功", bookDTOs);
+	}
+	
+	@GetMapping (value = "/book/page", produces = "application/json;charset=utf-8")
+	public ApiResponse<List<BookDTO>> getBookByPage(@RequestParam(defaultValue = "1") Integer page,
+												@RequestParam(defaultValue = "3") Integer size) {
+		if (page <1 || size < 1) {
+			return new ApiResponse<>(false, "page 與 size 必須 > 0" , null);
+		}
+		
+		int start = (page-1) * size;
+		List<BookDTO> bookDTOs = bookService.findBooksByPage(start, size);
+		
+		if (bookDTOs.isEmpty()) {
+			return new ApiResponse<>(false, "此頁無資料", null);
+		}
+		return new ApiResponse<>(true, "第" + page + "頁, 查詢成功", bookDTOs);
 	}
 	
 	@GetMapping (value = "/book/{id}", produces = "application/json;charset=utf-8")
