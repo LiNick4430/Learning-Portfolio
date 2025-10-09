@@ -11,9 +11,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,26 +25,26 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "`user`")
-public class User {
+@Table(name = "product")
+public class Product {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(length = 50, unique = true, nullable = false)
-	private String username;
+	@Column(nullable = false, unique = true, length = 50)
+	private String name;
 	
-	@Column(length = 255, nullable = false)
-	private String password;
+	@Column(nullable = false)
+	private Integer price;
 	
-	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private List<Order> orders;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "product_image_id")
+	private ProductImage productImage;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(
-			name = "user_product",
-			joinColumns = @JoinColumn(name = "user_id"),			// user's PK
-			inverseJoinColumns = @JoinColumn(name = "product_id")	// product's PK
-	)
-	private Set<Product> favoriteProducts;
+	@OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<OrderItem> orderItems;
+	
+	@ManyToMany(mappedBy = "favoriteProducts")
+	private Set<User> favoriteUsers;
 }
