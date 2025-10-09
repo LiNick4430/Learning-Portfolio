@@ -1,4 +1,4 @@
-package com.example.demo.test;
+package com.example.demo.test.user;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +16,11 @@ public class AddUser {
 	@Test
 	void add() {
 		User user1 = new User();
-		user1.setUsername("john");
+		user1.setUsername("john2");
 		user1.setPassword("1234");
 		
 		User user2 = new User();
-		user2.setUsername("mary");
+		user2.setUsername("mary2");
 		user2.setPassword("5678");
 		
 		userRepository.save(user1);
