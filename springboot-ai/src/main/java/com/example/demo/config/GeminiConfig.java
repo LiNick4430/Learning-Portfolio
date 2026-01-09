@@ -34,9 +34,9 @@ public class GeminiConfig {
 	@Bean
 	public GoogleGenAiChatModel geminiChatModel(Client client) {
 		GoogleGenAiChatOptions options = GoogleGenAiChatOptions.builder()
-				.model("gemini-2.5-flash")
-				.temperature(0.7)
-				.maxOutputTokens(1024)
+				.model("gemma-3-27b-it")	// 模型名稱
+				.temperature(0.7)			// 模型溫度
+				.maxOutputTokens(4096)		// 回傳最大數量
 				.build();
 		
 		return GoogleGenAiChatModel.builder()

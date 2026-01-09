@@ -14,11 +14,11 @@ function ask() {
 		.then(res => res.text())
 		.then(answer => {
 			chatBox.innerText += `AI: ${answer}\n\n`;
-			chatBox.scrollTo(0, chatBox.scrollHeight);
+			chatBox.scrollTop = chatBox.scrollHeight;
 		})
 		.catch(err => {
 			chatBox.innerText += "錯誤呼叫\n";
-			chatBox.scrollTo(0, chatBox.scrollHeight);
+			chatBox.scrollTop = chatBox.scrollHeight;
 		})
 }
 
@@ -40,7 +40,7 @@ function stream() {
 	// 都後端送出一個事件資料(chunk)時, 就會觸發 onmessage
 	eventSource.onmessage = function(event) {
 		chatBox.innerText += event.data;
-		chatBox.scrollTo(0, chatBox.scrollHeight);
+		chatBox.scrollTop = chatBox.scrollHeight;
 	};
 	
 	// 當連線失敗或後端關閉時就會觸發 onerror
@@ -50,6 +50,6 @@ function stream() {
 		eventSource.close();
 		
 		chatBox.innerText += "\n[Stream end]\n";
-		chatBox.scrollTo(0, chatBox.scrollHeight);
+		chatBox.scrollTop = chatBox.scrollHeight;
 	};
 }
