@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Gemini AI Chat</title>
+		<link rel="stylesheet" href="css/chat.css">
+	</head>
+	<body>
+		<h2>Gemini AI Chat</h2>
+		
+		<div id="chat-box"></div>
+		
+		<div id="user-input">
+			<input type="text" id="question" placeholder="請輸入您要問的問題...">
+			
+			<button onclick="ask()">傳送(Ask 一次回應)</button>
+			
+			<button onclick="stream()">傳送(Stream 串流回應)</button>
+		</div>
+	
+		<!-- 引入外部 js -->
+		<script src="js/chat.js"></script>
+	</body>
+</html>
