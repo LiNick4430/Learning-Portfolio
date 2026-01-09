@@ -33,10 +33,10 @@ public class GeminiConfig {
 
 		// 測試用 顯示可以使用的模型
 		if (isShowModelNames) {
+			System.out.println("====== 正在檢索可用模型列表 ======");
 			client.models.list(null).forEach(model -> {
 				System.out.println("模型標記: " + model.name());
 	            System.out.println("顯示名稱: " + model.displayName());
-	            System.out.println("描述: " + model.description());
 	            System.out.println("--------------------------");
 			});
 		}
