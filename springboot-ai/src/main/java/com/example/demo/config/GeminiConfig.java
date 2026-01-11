@@ -3,6 +3,7 @@ package com.example.demo.config;
 import java.util.List;
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.google.genai.GoogleGenAiChatModel;
@@ -59,7 +60,7 @@ public class GeminiConfig {
 	}
 	
 	@Bean
-	ChatClient chatClient(GoogleGenAiChatModel geminiChatModel) {
+	ChatClient chatClient(GoogleGenAiChatModel geminiChatModel, ChatMemory chatMemory) {
 		return ChatClient.builder(geminiChatModel)
 				.build();
 	}

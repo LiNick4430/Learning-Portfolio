@@ -69,10 +69,10 @@ public class GeminiService {
 		if (conversationId == null || conversationId.isEmpty()) {
 			conversationId = ChatMemory.DEFAULT_CONVERSATION_ID;
 		}
-		
-		/* 舊版回答
+
 		final String finalConversationId = conversationId;
 
+		/* 舊版回答
 		// 1. 將使用者問題 存入對話記憶
 		chatMemory.add(finalConversationId, new UserMessage(q));
 
@@ -82,8 +82,8 @@ public class GeminiService {
 
 		// 3. AI 完整回答
 		StringBuilder fullAnswer = new StringBuilder();
-		
-		
+
+
 		return chatClient.prompt(prompt)
 				.stream()
 				.content()
@@ -94,12 +94,12 @@ public class GeminiService {
 				.doOnComplete(() -> {
 					chatMemory.add(finalConversationId, new AssistantMessage(fullAnswer.toString()));
 				});
-				*/
-		
+		 */
+
 		// 新版本回答 使用 advisors
 		return chatClient.prompt()
 				.user(q)
-				.advisors(MessageChatMemoryAdvisor.builder(chatMemory).conversationId(conversationId).build())
+				.advisors(MessageChatMemoryAdvisor.builder(chatMemory).conversationId(finalConversationId).build())
 				.stream()
 				.content();
 	}
