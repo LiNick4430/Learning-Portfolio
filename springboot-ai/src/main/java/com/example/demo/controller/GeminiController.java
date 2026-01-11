@@ -21,12 +21,22 @@ public class GeminiController {
 	}
 	
 	@GetMapping("/ask")
-	public String Chat(@RequestParam String q) {
+	public String Ask(@RequestParam String q) {
 		return geminiService.ask(q);
+	}
+	
+	@GetMapping("/memory/ask")
+	public String askWithMemory(@RequestParam String q) {
+		return geminiService.askWithMemory(null, q);
 	}
 	
 	@GetMapping(value = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
 	public Flux<String> stream(@RequestParam String q) {
 		return geminiService.stream(q);
+	}
+	
+	@GetMapping(value = "/memory/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+	public Flux<String> streamWithMemory(@RequestParam String q) {
+		return geminiService.streamWithMemory(null, q);
 	}
 }
