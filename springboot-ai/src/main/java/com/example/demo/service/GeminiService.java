@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.List;
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.messages.Message;
@@ -69,6 +70,7 @@ public class GeminiService {
 			conversationId = ChatMemory.DEFAULT_CONVERSATION_ID;
 		}
 		
+		/* 舊版回答
 		final String finalConversationId = conversationId;
 
 		// 1. 將使用者問題 存入對話記憶
@@ -81,6 +83,7 @@ public class GeminiService {
 		// 3. AI 完整回答
 		StringBuilder fullAnswer = new StringBuilder();
 		
+		
 		return chatClient.prompt(prompt)
 				.stream()
 				.content()
@@ -91,5 +94,13 @@ public class GeminiService {
 				.doOnComplete(() -> {
 					chatMemory.add(finalConversationId, new AssistantMessage(fullAnswer.toString()));
 				});
+				*/
+		
+		// 新版本回答 使用 advisors
+		return chatClient.prompt()
+				.user(q)
+				.advisors(MessageChatMemoryAdvisor.builder(chatMemory).conversationId(conversationId).build())
+				.stream()
+				.content();
 	}
 }
